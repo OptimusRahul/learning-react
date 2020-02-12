@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Auxillary';
 
 class App extends Component {
 
@@ -86,20 +88,20 @@ class App extends Component {
     }
     
     return (
-      <div className={classes.App}>
-      <button onClick={() => {this.setState({showCockpit:false})}}> Remove Cockpit </button>
-        {this.state.showCockpit ? 
-          <Cockpit
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-        clicked={this.togglePersonsHandler}/> : null }
-        {persons}
-      </div>
+      <Aux>
+        <button onClick={() => {this.setState({showCockpit:false})}}> Remove Cockpit </button>
+          {this.state.showCockpit ? 
+            <Cockpit
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+          clicked={this.togglePersonsHandler}/> : null }
+          {persons}
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
 
 
 /* {this.state.persons.map((person, index) => {
